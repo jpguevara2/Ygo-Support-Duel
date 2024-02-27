@@ -1,6 +1,7 @@
 package com.example.ygo_support_duel;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -84,12 +85,31 @@ public class Duelo extends AppCompatActivity {
         for (Button boton : botonesNumericos) {
             boton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    int valorActual = Integer.parseInt(txtlp1.getText().toString());
-                    txtlp1.setText(""+(valorActual - (v.getId())));
+                public void onClick(View clickedButton) {
+                    // Extract value from "text" not from "ID", ID is given by android resources.
+                    String textInButton = ((Button) clickedButton).getText().toString();
+
+                    // get the rest of the text AFTER the sign "-" or "+"
+                    int value = Integer.parseInt(textInButton.substring(1));
+
+                    // ok, only two cases, if it's "-", then just multiply by -1 and just add.
+                    if (textInButton.startsWith("-")) {
+                        value *= -1;
+                    }
+
+                    // which player is this?
+                    String getFullResourceId = getResources().getResourceName(clickedButton.getId());
+                    boolean isPlayerOne = !getFullResourceId.endsWith("2");
+
+                    // add the result.
+                    if (isPlayerOne) {
+                        int valorActual = Integer.parseInt(txtlp1.getText().toString());
+                        txtlp1.setText(String.valueOf(valorActual + value));
+                    } else {
+                        int valorActual = Integer.parseInt(txtlp2.getText().toString());
+                        txtlp2.setText(String.valueOf(valorActual + value));
+                    }
                 }
-
-
             });
         }
 
