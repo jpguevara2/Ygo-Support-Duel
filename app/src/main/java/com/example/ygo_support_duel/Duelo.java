@@ -202,11 +202,4 @@ public class Duelo extends AppCompatActivity {
 
     }
 
-
-    /*private void onNumeroClick(String numero) {
-
-        txtlp1.append(numero);
-    }*/
-
-
 }

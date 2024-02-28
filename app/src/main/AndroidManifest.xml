@@ -13,17 +13,24 @@
         android:theme="@style/Theme.YgoSupportDuel"
         tools:targetApi="31">
         <activity
-            android:name=".Calculadora"
-            android:exported="false" />
+            android:name=".Configuraciones"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Manual2"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Duelo"
             android:exported="false" />
         <activity
             android:name=".Manual"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

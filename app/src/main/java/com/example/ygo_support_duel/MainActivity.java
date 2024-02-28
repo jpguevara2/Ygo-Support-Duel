@@ -10,7 +10,7 @@ import android.widget.ImageButton;
 public class MainActivity extends AppCompatActivity {
 
     //declarar imagenes de botones
-    ImageButton btnsalir,btnmanual,btnduelo;
+    ImageButton btnsalir,btnmanual,btnduelo,btnopcion;
 
 
     @Override
@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         btnsalir = (ImageButton) findViewById(R.id.btnSalida);
         btnmanual = (ImageButton) findViewById(R.id.btnManual);
         btnduelo = (ImageButton) findViewById(R.id.btnDuelo);
+        btnopcion =(ImageButton) findViewById(R.id.btnOpcion);
 
         //metodo para salir de la app
         btnsalir.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, Duelo.class);
+                startActivity(i);
+            }
+        });
+
+        btnopcion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, Configuraciones.class);
                 startActivity(i);
             }
         });
