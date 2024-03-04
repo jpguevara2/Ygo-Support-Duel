@@ -3,6 +3,7 @@ package com.example.ygo_support_duel;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ public class Configuraciones extends AppCompatActivity {
 
     //Declarar Switch
     Switch stema;
+
+    Boolean nightmode;
 
     //Declarar Imagen de Boton
     ImageButton btnvolver;
@@ -33,27 +36,34 @@ public class Configuraciones extends AppCompatActivity {
 
         //Metodo para apretar cambiar la opcion del Switch
 
+        SharedPreferences sp;
 
-        SharedPreferences sp = getSharedPreferences("SP", this.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
+        sp = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        nightmode = sp.getBoolean("night", false);
 
-        int theme = sp.getInt("theme", 1);
-        if(theme==1){
-            stema.setChecked(true);
-        }else{
+        if(nightmode){
             stema.setChecked(false);
-        }
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
+            //Metodo para cambiar el modo de la interfaz
+        }
         stema.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stema.isChecked()){
-                    editor.putInt("theme", 0);
-                }else{
-                    editor.putInt("theme", 1);
+                SharedPreferences.Editor editor;
+                {
+                  if(nightmode){
+                  AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                  editor = sp.edit();
+                  editor.putBoolean( "night", false);
+                  }else{
+                      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                      editor = sp.edit();
+                      editor.putBoolean( "night", true);
+                  }
+                  editor.apply();
+                  //editor.commit();
                 }
-                    editor.commit();
-                    setDayNigth();
             }
         });
 
@@ -65,18 +75,5 @@ public class Configuraciones extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
-
-    //Metodo para cambiar el modo de la interfaz
-    public void setDayNigth(){
-        SharedPreferences sp = getSharedPreferences("SP", this.MODE_PRIVATE);
-        int theme = sp.getInt("theme",1);
-        if(theme==0){
-            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        }else{
-            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
-    }
-
 }
