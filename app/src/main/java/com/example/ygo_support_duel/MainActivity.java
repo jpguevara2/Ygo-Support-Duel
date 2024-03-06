@@ -1,69 +1,33 @@
 package com.example.ygo_support_duel;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageButton;
+import android.os.Handler;
+import android.view.WindowManager;
+import android.widget.ImageView;
+
 
 public class MainActivity extends AppCompatActivity {
-
-    //declarar imagenes de botones
-    ImageButton btnsalir,btnmanual,btnduelo,btnopcion;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
-        //asignar variables a imagenes de botones
-        btnsalir = (ImageButton) findViewById(R.id.btnSalida);
-        btnmanual = (ImageButton) findViewById(R.id.btnManual);
-        btnduelo = (ImageButton) findViewById(R.id.btnDuelo);
-        btnopcion =(ImageButton) findViewById(R.id.btnOpcion);
+        ImageView imgportada = (ImageView) findViewById(R.id.imgPortada);
 
-        //metodo para salir de la app
-        btnsalir.setOnClickListener(new View.OnClickListener() {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.addCategory(Intent.CATEGORY_HOME);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-               startActivity(intent);
-            }
-        });
-
-            //metodo para ir a la pantalla del manual de la app
-            btnmanual.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(MainActivity.this, Manual.class);
-                    startActivity(i);
-                }
-            });
-
-        //metodo para ir a la pantalla de duelo
-        btnduelo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, Duelo.class);
+            public void run() {
+                Intent i = new Intent(MainActivity.this, Menu.class);
                 startActivity(i);
+                finish();
             }
-        });
-
-        btnopcion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, Configuraciones.class);
-                startActivity(i);
-            }
-        });
-
+        }, 4000);
 
     }
-
 
 
     }

@@ -16,7 +16,7 @@ public class Menu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_menu);
 
         //asignar variables a imagenes de botones
         btnsalir = (ImageButton) findViewById(R.id.btnSalida);
@@ -63,7 +63,6 @@ public class Menu extends AppCompatActivity {
 
 
     }
-
 
 
     }

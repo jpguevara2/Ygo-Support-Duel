@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,9 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class Duelo extends AppCompatActivity {
+
+    //declarar audio
+    MediaPlayer mp;
 
     //declarar imagenes de botones
     ImageButton btndado,btnmoneda,btnvolver2;
@@ -76,6 +80,9 @@ public class Duelo extends AppCompatActivity {
         rbtn3 = (RadioButton) findViewById(R.id.rbtn3);
         rbtn4 = (RadioButton) findViewById(R.id.rbtn4);
 
+        //asginar audio
+        mp = MediaPlayer.create(this, R.raw.pointdrop);
+
 
         // Configurar clics de botón
         Button[] botonesNumericos = {btnm1000, btnm500, btnm100, btnm50,  btnd, btnp1000, btnp500, btnp100,
@@ -105,9 +112,13 @@ public class Duelo extends AppCompatActivity {
                     if (isPlayerOne) {
                         int valorActual = Integer.parseInt(txtlp1.getText().toString());
                         txtlp1.setText(String.valueOf(valorActual + value));
+
+                        //mp.start();
                     } else {
                         int valorActual = Integer.parseInt(txtlp2.getText().toString());
                         txtlp2.setText(String.valueOf(valorActual + value));
+
+                        //mp.start();
                     }
                 }
             });
@@ -121,6 +132,7 @@ public class Duelo extends AppCompatActivity {
                 int valorActual = Integer.parseInt(txtlp1.getText().toString());
                 int resultado = valorActual/2;
                 txtlp1.setText(""+resultado);
+                mp.start();
             }
         });
 
@@ -131,6 +143,7 @@ public class Duelo extends AppCompatActivity {
                 int valorActual = Integer.parseInt(txtlp2.getText().toString());
                 int resultado = valorActual/2;
                 txtlp2.setText(""+resultado);
+                mp.start();
             }
         });
 
@@ -169,7 +182,7 @@ public class Duelo extends AppCompatActivity {
         btnvolver2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Duelo.this, MainActivity.class);
+                Intent intent = new Intent(Duelo.this, Menu.class);
                 startActivity(intent);
             }
         });

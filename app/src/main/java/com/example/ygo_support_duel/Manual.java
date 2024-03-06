@@ -32,7 +32,7 @@ public class Manual extends AppCompatActivity {
         btnback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void  onClick(View v) {
-                Intent intent = new Intent(Manual.this, MainActivity.class);
+                Intent intent = new Intent(Manual.this, Menu.class);
                 startActivity(intent);
             }
         });
