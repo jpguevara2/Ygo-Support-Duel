@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ygo-Support-Duel</string>
+    <string name="txtDado2">" Dice: To throw the dice touch the image"</string>
+    <string name="txtMoneda2">Coin: To throw the coin touch the image</string>
+    <string name="txtVictoria">Victory points: To mark the victory of a duel, touch the point and its color will change</string>
+    <string name="txtReiniciar">Restart Duel: To restart the duel, touch the button, this will leave the life points of both players at 8000</string>
+    <string name="txtReiniciar2">Restart Match: To restart the duel, touch the button, this will leave the life points of both players at 8000 and will uncheck all the marked victory points</string>
+    <string name="txtManual2">User manual</string>
+</resources>
