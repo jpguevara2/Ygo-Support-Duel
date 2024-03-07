@@ -32,7 +32,6 @@ public class Configuraciones extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuraciones);
 
-
         //Asignar variable a Switch
         stema = (Switch) findViewById(R.id.swtichTema);
         saudio = (Switch) findViewById(R.id.switchAudio);
@@ -45,38 +44,31 @@ public class Configuraciones extends AppCompatActivity {
 
         //Metodo para apretar cambiar la opcion del Switch
 
-        SharedPreferences sp;
+        // get preferences from OS
+        SharedPreferences sp = getSharedPreferences("MODE", Context.MODE_PRIVATE);
 
-        sp = getSharedPreferences("MODE", Context.MODE_PRIVATE);
-        nightmode = sp.getBoolean("night", false);
+        // get the "night" value, default to false if not found
+        boolean isNightmodeActive = sp.getBoolean("night", false);
+        stema.setChecked(isNightmodeActive);
 
-
-        if(nightmode){
-            stema.setChecked(false);
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-
-            //Metodo para cambiar el modo de la interfaz
-        }
         stema.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor;
-                {
-                  if(nightmode){
-                  AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                  editor = sp.edit();
-                  editor.putBoolean( "night", false);
-                  }else{
-                      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                      editor = sp.edit();
-                      editor.putBoolean( "night", true);
-                  }
-                  editor.apply();
-                  //editor.commit();
-                }
+                // whenever the night switch is clicked, bring the settings
+                SharedPreferences sp = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+
+                // bring the editr FROM the settings
+                SharedPreferences.Editor editor = sp.edit();
+
+                // check if the UI was checked or not
+                boolean isChecked = stema.isChecked();
+
+                // now let's set the values first according OS (setDefaultNightMode), then to the settings using the editor
+                AppCompatDelegate.setDefaultNightMode(isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+                editor.putBoolean( "night", isChecked);
+                editor.apply();
             }
         });
-
 
         //Metodo para activar/desactivar audio
         saudio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
