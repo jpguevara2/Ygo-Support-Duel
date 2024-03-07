@@ -8,39 +8,38 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-public class Manual extends AppCompatActivity {
+public class Manual2 extends AppCompatActivity {
 
     //declarar imagenes de boton
     ImageButton btnback;
 
     //declarar botones
-    Button btnp2;
-
+    Button btnp1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manual);
-
+        setContentView(R.layout.activity_manual2);
 
         //asignar variable a los botones
         btnback = (ImageButton) findViewById(R.id.btnVolver);
-        btnp2 = (Button) findViewById(R.id.btnPagina2);
+        btnp1 = (Button) findViewById(R.id.btnPagina1);
 
 
         //metodo para volver al menu principal
         btnback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void  onClick(View v) {
-                Intent intent = new Intent(Manual.this, Menu.class);
+                Intent intent = new Intent(Manual2.this, Menu.class);
                 startActivity(intent);
             }
         });
 
-        btnp2.setOnClickListener(new View.OnClickListener() {
+        //metodo para volver a la pagina 1 del manual
+        btnp1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Manual.this, Manual2.class);
+                Intent intent = new Intent(Manual2.this, Manual.class);
                 startActivity(intent);
             }
         });

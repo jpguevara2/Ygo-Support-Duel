@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Ygo-Support-Duel</string>
+    <string name="txtDado2">Dado: Para lanzar el dado tocar la imagen</string>
+    <string name="txtMoneda2">Moneda: Para lanzar la moneda tocar la imagen</string>
+    <string name="txtVictoria">Puntos de victoria: Para marcar la victoria de un duelo tocar el punto y cambiara su color</string>
+    <string name="txtReiniciar">Reiniciar Duelo: Para reiniciar duelo, tocar boton, este dejara los puntos de vida de ambos jugadores en 8000</string>
+    <string name="txtReiniciar2">Reiniciar Match: Para reiniciar duelo, tocar boton, este dejara los puntos de vida de ambos jugadores en 8000 y desmarcara todos los puntos de victoria marcados</string>
+    <string name="txtManual2">Manual de uso</string>
 </resources>

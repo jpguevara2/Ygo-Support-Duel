@@ -4,13 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Manual">
+    style="@style/Screen"
+    tools:context=".Configuraciones">
 
     <TextView
-        android:id="@+id/txtManual2"
+        android:id="@+id/txtSonido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Manual de uso"
+        android:text="Sonido"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.373" />
+
+    <TextView
+        android:id="@+id/txtIdioma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Idioma"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.479" />
+
+    <TextView
+        android:id="@+id/txtConfiguraciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Configuraciones"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,54 +46,28 @@
         app:layout_constraintVertical_bias="0.077" />
 
     <TextView
-        android:id="@+id/txtDado2"
+        android:id="@+id/txtModo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dado: Para lanzar el dado tocar la imagen"
-        android:textSize="20sp"
+        android:text="Modo Oscuro"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.138"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.176" />
+        app:layout_constraintVertical_bias="0.255" />
 
-    <ImageView
-        android:id="@+id/imgDado"
-        android:layout_width="104dp"
-        android:layout_height="89dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.271"
-        app:srcCompat="@drawable/skull" />
-
-    <TextView
-        android:id="@+id/txtMoneda2"
+    <Switch
+        android:id="@+id/swtichTema"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Moneda: Para lanzar la moneda tocar la imagen"
-        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.829"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.427" />
-
-    <ImageView
-        android:id="@+id/imgMoneda"
-        android:layout_width="112dp"
-        android:layout_height="90dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.528"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.572"
-        app:srcCompat="@drawable/coin" />
+        app:layout_constraintVertical_bias="0.259" />
 
     <ImageButton
         android:id="@+id/btnVolver"
@@ -80,39 +81,15 @@
         app:layout_constraintVertical_bias="0.976"
         app:srcCompat="@android:drawable/ic_menu_revert" />
 
-    <TextView
-        android:id="@+id/txtVictoria"
+    <Switch
+        android:id="@+id/switchAudio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Puntos de victoria: Para marcar la victoria de un duelo tocar el punto y cambiara su color "
-        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.827"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.704" />
+        app:layout_constraintVertical_bias="0.372" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="79dp"
-        android:layout_height="63dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtVictoria"
-        app:layout_constraintVertical_bias="0.108"
-        app:srcCompat="@drawable/victoria" />
-
-    <Button
-        android:id="@+id/btnPagina2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.513"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.972" />
 </androidx.constraintlayout.widget.ConstraintLayout>

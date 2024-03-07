@@ -25,65 +25,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
-    <ImageButton
-        android:id="@+id/btnDuelo"
-        android:layout_width="240dp"
-        android:layout_height="198dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.217"
-        app:srcCompat="@drawable/explosion_dimensional" />
-
-    <TextView
-        android:id="@+id/txtDuelo"
+    <ImageView
+        android:id="@+id/imgPortada"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Duelo"
-        android:textSize="24sp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.474"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.473" />
+        app:srcCompat="@drawable/yugi"
+        tools:layout_editor_absoluteX="0dp"
+        tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/txtManual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Manual"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.874" />
-
-    <ImageButton
-        android:id="@+id/btnSalida"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.957"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.994"
-        app:srcCompat="@drawable/exit" />
-
-    <ImageButton
-        android:id="@+id/btnManual"
-        android:layout_width="244dp"
-        android:layout_height="202dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75"
-        app:srcCompat="@drawable/libro" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
