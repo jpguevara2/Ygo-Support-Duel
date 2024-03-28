@@ -61,8 +61,6 @@ public class Menu extends AppCompatActivity {
             }
         });
 
-
     }
 
-
-    }
+}

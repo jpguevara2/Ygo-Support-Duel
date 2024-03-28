@@ -1,9 +1,9 @@
 package com.example.ygo_support_duel;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -93,6 +93,7 @@ public class Duelo extends AppCompatActivity {
             boton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View clickedButton) {
+                    SharedPreferences soundSettings = getSharedPreferences("sound", MODE_PRIVATE);
                     // Extract value from "text" not from "ID", ID is given by android resources.
                     String textInButton = ((Button) clickedButton).getText().toString();
 
@@ -112,13 +113,17 @@ public class Duelo extends AppCompatActivity {
                     if (isPlayerOne) {
                         int valorActual = Integer.parseInt(txtlp1.getText().toString());
                         txtlp1.setText(String.valueOf(valorActual + value));
+                        if(!soundSettings.getBoolean("silentMode", false)){
+                            mp.start();
+                        }
 
-                        //mp.start();
                     } else {
                         int valorActual = Integer.parseInt(txtlp2.getText().toString());
                         txtlp2.setText(String.valueOf(valorActual + value));
+                        if(!soundSettings.getBoolean("silentMode", false)){
+                            mp.start();
+                        }
 
-                        //mp.start();
                     }
                 }
             });
@@ -129,10 +134,13 @@ public class Duelo extends AppCompatActivity {
         btnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences soundSettings = getSharedPreferences("sound", MODE_PRIVATE);
                 int valorActual = Integer.parseInt(txtlp1.getText().toString());
                 int resultado = valorActual/2;
                 txtlp1.setText(""+resultado);
-                mp.start();
+                if(!soundSettings.getBoolean("silentMode", false)){
+                    mp.start();
+                }
             }
         });
 
@@ -140,14 +148,15 @@ public class Duelo extends AppCompatActivity {
         btnd2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences soundSettings = getSharedPreferences("sound", MODE_PRIVATE);
                 int valorActual = Integer.parseInt(txtlp2.getText().toString());
                 int resultado = valorActual/2;
                 txtlp2.setText(""+resultado);
-                mp.start();
+                if(!soundSettings.getBoolean("silentMode", false)){
+                    mp.start();
+                }
             }
         });
-
-
 
         //metodo para reiniciar duelo
        btnreiniciar.setOnClickListener(new View.OnClickListener() {
@@ -174,9 +183,6 @@ public class Duelo extends AppCompatActivity {
                 rbtn4.setChecked(false);
             }
         });
-
-
-
 
         //metodo para volver al menu principal
         btnvolver2.setOnClickListener(new View.OnClickListener() {
