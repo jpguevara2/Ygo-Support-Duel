@@ -14,7 +14,7 @@
         android:text="YGO Support Duel"
         android:textColor="@color/material_dynamic_neutral30"
         android:textColorHint="@color/material_dynamic_neutral30"
-        android:textSize="48sp"
+        android:textSize="42sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
