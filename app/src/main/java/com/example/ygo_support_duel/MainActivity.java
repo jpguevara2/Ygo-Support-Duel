@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
-import android.widget.ImageView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -18,8 +17,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-
-        ImageView imgportada = (ImageView) findViewById(R.id.imgPortada);
 
         // get the preferences from OS and check the "night" value as soon as we start the app
         SharedPreferences sp = getSharedPreferences("MODE", Context.MODE_PRIVATE);
@@ -41,5 +38,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    }
+}

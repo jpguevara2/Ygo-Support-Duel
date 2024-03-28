@@ -6,19 +6,23 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
 
+import java.util.Locale;
+
+
 public class Configuraciones extends AppCompatActivity {
 
     //Declarar Switch
-    Switch stema,saudio;
+    Switch stema,saudio,sidioma;
 
+    //declarar Boolean del modo nocturno
     Boolean nightmode;
 
     //Declarar Imagen de Boton
@@ -35,6 +39,7 @@ public class Configuraciones extends AppCompatActivity {
         //Asignar variable a Switch
         stema = (Switch) findViewById(R.id.swtichTema);
         saudio = (Switch) findViewById(R.id.switchAudio);
+        sidioma = (Switch) findViewById(R.id.switchIdioma);
 
         //Asginar variable a Boton
         btnvolver = (ImageButton) findViewById(R.id.btnVolver);
@@ -42,10 +47,16 @@ public class Configuraciones extends AppCompatActivity {
         //Asignar audio
         mp = MediaPlayer.create(this, R.raw.pointdrop);
 
+
         //Metodo para apretar cambiar la opcion del Switch
 
         // get preferences from OS
         SharedPreferences sp = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        SharedPreferences spsound = getSharedPreferences("sound", MODE_PRIVATE);
+        SharedPreferences spidioma = getSharedPreferences("idioma", MODE_PRIVATE);
+        saudio.setChecked(spsound.getBoolean("sound",false));
+        sidioma.setChecked(spidioma.getBoolean("idioma",false));
+
 
         // get the "night" value, default to false if not found
         boolean isNightmodeActive = sp.getBoolean("night", false);
@@ -74,14 +85,40 @@ public class Configuraciones extends AppCompatActivity {
         saudio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor spEditor = getSharedPreferences("sound", MODE_PRIVATE).edit();
+                spEditor.putBoolean("sound", isChecked);
+
                 if (isChecked) {
-                    mp.start();
+                    spEditor.putBoolean("silentMode", false);
+                    mp.setVolume(0,1);
                 } else {
-                    mp.pause();
+                    spEditor.putBoolean("silentMode", true);
+                    mp.setVolume(0,0);
+
                 }
+                spEditor.apply();
             }
         });
 
+        //Metodo para cambiar el idioma
+        sidioma.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor spEditor = getSharedPreferences("idioma", MODE_PRIVATE).edit();
+                spEditor.putBoolean("idioma", isChecked);
+
+                if (isChecked) {
+                    // Cambiar al español
+                    spEditor.putBoolean("idioma", false);
+                    cambiarIdioma("es");
+                } else {
+                    // Cambiar al idioma predeterminado (inglés)
+                    spEditor.putBoolean("idioma", true);
+                    cambiarIdioma("en");
+                }
+                spEditor.apply();
+            }
+        });
 
         //Metodo para volver al menu Principal
         btnvolver.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +128,8 @@ public class Configuraciones extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
     //Metodo para liberar los recursos de media player
     @Override
@@ -100,4 +139,21 @@ public class Configuraciones extends AppCompatActivity {
             mp.release();
         }
     }
+
+    private void cambiarIdioma(String codigoIdioma) {
+        Locale locale = new Locale(codigoIdioma);
+        Locale.setDefault(locale);
+
+        Configuration config = new Configuration();
+
+        getResources().updateConfiguration(config, getApplicationContext().getResources().getDisplayMetrics());
+
+
+        // Re-arranca la actividad para aplicar el cambio de idioma
+        Intent intent = new Intent(this, Configuraciones.class); // Reemplaza TuActividadActual con la clase de tu actividad actual
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
 }

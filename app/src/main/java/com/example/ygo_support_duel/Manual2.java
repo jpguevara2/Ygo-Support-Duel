@@ -25,7 +25,6 @@ public class Manual2 extends AppCompatActivity {
         btnback = (ImageButton) findViewById(R.id.btnVolver);
         btnp1 = (Button) findViewById(R.id.btnPagina1);
 
-
         //metodo para volver al menu principal
         btnback.setOnClickListener(new View.OnClickListener() {
             @Override
