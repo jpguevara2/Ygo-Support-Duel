@@ -101,7 +101,7 @@ public class Configuraciones extends AppCompatActivity {
         });
 
         //Metodo para cambiar el idioma
-        sidioma.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        /*sidioma.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPreferences.Editor spEditor = getSharedPreferences("idioma", MODE_PRIVATE).edit();
@@ -118,7 +118,7 @@ public class Configuraciones extends AppCompatActivity {
                 }
                 spEditor.apply();
             }
-        });
+        });*/
 
         //Metodo para volver al menu Principal
         btnvolver.setOnClickListener(new View.OnClickListener() {
