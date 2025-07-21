@@ -14,150 +14,105 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
 
-import java.util.Locale;
-
-
 public class Configuraciones extends AppCompatActivity {
 
-    //Declarar Switch
-    Switch stema,saudio,sidioma;
+    // Declarar Switches
+    Switch stema, saudio, sidioma;
 
-    //declarar Boolean del modo nocturno
-    Boolean nightmode;
-
-    //Declarar Imagen de Boton
+    // Declarar botón
     ImageButton btnvolver;
 
-    //declarar audio
+    // Declarar audio
     MediaPlayer mp;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, LocaleHelper.getSavedLanguage(newBase)));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuraciones);
 
-        //Asignar variable a Switch
-        stema = (Switch) findViewById(R.id.swtichTema);
-        saudio = (Switch) findViewById(R.id.switchAudio);
-        sidioma = (Switch) findViewById(R.id.switchIdioma);
-
-        //Asginar variable a Boton
-        btnvolver = (ImageButton) findViewById(R.id.btnVolver);
-
-        //Asignar audio
+        // Asignar vistas a variables
+        stema = findViewById(R.id.swtichTema);
+        saudio = findViewById(R.id.switchAudio);
+        sidioma = findViewById(R.id.switchIdioma);
+        btnvolver = findViewById(R.id.btnVolver);
         mp = MediaPlayer.create(this, R.raw.pointdrop);
 
-
-        //Metodo para apretar cambiar la opcion del Switch
-
-        // get preferences from OS
+        // Leer preferencias
         SharedPreferences sp = getSharedPreferences("MODE", Context.MODE_PRIVATE);
         SharedPreferences spsound = getSharedPreferences("sound", MODE_PRIVATE);
         SharedPreferences spidioma = getSharedPreferences("idioma", MODE_PRIVATE);
-        saudio.setChecked(spsound.getBoolean("sound",false));
-        sidioma.setChecked(spidioma.getBoolean("idioma",false));
+        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
 
-
-        // get the "night" value, default to false if not found
+        // Aplicar estados guardados a los switches
         boolean isNightmodeActive = sp.getBoolean("night", false);
         stema.setChecked(isNightmodeActive);
 
+        boolean isSoundActive = spsound.getBoolean("sound", false);
+        saudio.setChecked(isSoundActive);
+
+        boolean estadoSwitchIdioma = prefs.getBoolean("switchIdiomaChecked", false);
+        sidioma.setChecked(estadoSwitchIdioma);
+
+        // Cambiar tema
         stema.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // whenever the night switch is clicked, bring the settings
-                SharedPreferences sp = getSharedPreferences("MODE", Context.MODE_PRIVATE);
-
-                // bring the editr FROM the settings
-                SharedPreferences.Editor editor = sp.edit();
-
-                // check if the UI was checked or not
                 boolean isChecked = stema.isChecked();
-
-                // now let's set the values first according OS (setDefaultNightMode), then to the settings using the editor
+                SharedPreferences.Editor editor = sp.edit();
                 AppCompatDelegate.setDefaultNightMode(isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
-                editor.putBoolean( "night", isChecked);
+                editor.putBoolean("night", isChecked);
                 editor.apply();
             }
         });
 
-       // @Override
-        //protected void attachBaseContext(Context newBase) {
-        //    super.attachBaseContext(LocaleHelper.setLocale(newBase, LocaleHelper.getSavedLanguage(newBase)));
-        //}
-
-        //Metodo para activar/desactivar audio
+        // Activar/desactivar sonido
         saudio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPreferences.Editor spEditor = getSharedPreferences("sound", MODE_PRIVATE).edit();
                 spEditor.putBoolean("sound", isChecked);
-
-                if (isChecked) {
-                    spEditor.putBoolean("silentMode", false);
-                    mp.setVolume(0,1);
-                } else {
-                    spEditor.putBoolean("silentMode", true);
-                    mp.setVolume(0,0);
-
-                }
+                spEditor.putBoolean("silentMode", !isChecked);
+                mp.setVolume(0, isChecked ? 1 : 0);
                 spEditor.apply();
             }
         });
 
-        //Metodo para cambiar el idioma
+        // Cambiar idioma
         sidioma.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 String langCode = isChecked ? "en" : "es";
+                LocaleHelper.saveLanguage(Configuraciones.this, langCode);
 
-                // Guardar idioma
-                SharedPreferences.Editor spEditor = getSharedPreferences("idioma", MODE_PRIVATE).edit();
-                spEditor.putBoolean("idioma", isChecked); // guardar estado del switch
+                SharedPreferences.Editor spEditor = getSharedPreferences("settings", MODE_PRIVATE).edit();
+                spEditor.putBoolean("switchIdiomaChecked", isChecked);
                 spEditor.apply();
 
-                // Guardar código de idioma y cambiar
-                LocaleHelper.saveLanguage(Configuraciones.this, langCode);
-                recreate(); // reinicia la actividad para aplicar el cambio
+                recreate(); // Reiniciar actividad para aplicar idioma
             }
         });
 
-                //Metodo para volver al menu Principal
-                btnvolver.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Configuraciones.this, Menu.class);
-                        startActivity(intent);
-                    }
-                });
-
-
-            }
-
-            //Metodo para liberar los recursos de media player
+        // Volver al menú principal
+        btnvolver.setOnClickListener(new View.OnClickListener() {
             @Override
-            protected void onDestroy() {
-                super.onDestroy();
-                if (mp != null) {
-                    mp.release();
-                }
-            }
-
-            private void cambiarIdioma(String codigoIdioma) {
-                Locale locale = new Locale(codigoIdioma);
-                Locale.setDefault(locale);
-
-                Configuration config = new Configuration();
-
-                getResources().updateConfiguration(config, getApplicationContext().getResources().getDisplayMetrics());
-
-
-                // Re-arranca la actividad para aplicar el cambio de idioma
-                Intent intent = new Intent(this, Configuraciones.class); // Reemplaza TuActividadActual con la clase de tu actividad actual
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            public void onClick(View v) {
+                Intent intent = new Intent(Configuraciones.this, Menu.class);
                 startActivity(intent);
-                finish();
             }
+        });
+    }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mp != null) {
+            mp.release();
         }
+    }
+
+}

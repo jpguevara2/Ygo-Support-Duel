@@ -10,6 +10,8 @@
     <string name="txtReiniciar">Restart Duel: To restart the duel, touch the button, this will leave the life points of both players at 8000</string>
     <string name="txtReiniciar2">Restart Match: To restart the duel, touch the button, this will leave the life points of both players at 8000 and will uncheck all the marked victory points</string>
     <string name="txtManual2">User manual</string>
+    <string name="txtPuntos">Life Points: To add or subtract life points from each player, press the button</string>
+    <string name="btnEditarLP3">Life Points</string>
     <string name="btnReiniciar">Restart Duel</string>
     <string name="btnReiniciar2">Restart Match</string>
     <!-- Configuracion-->

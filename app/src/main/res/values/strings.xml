@@ -9,6 +9,8 @@
     <string name="txtReiniciar">Reiniciar Duelo: Para reiniciar duelo, tocar boton, este dejara los puntos de vida de ambos jugadores en 8000</string>
     <string name="txtReiniciar2">Reiniciar Match: Para reiniciar duelo, tocar boton, este dejara los puntos de vida de ambos jugadores en 8000 y desmarcara todos los puntos de victoria marcados</string>
     <string name="txtManual2">Manual de uso</string>
+    <string name="txtPuntos">Puntos de Vida: Para sumar o restar puntos de vida de cada jugador, apretar el boton</string>
+    <string name="btnEditarLP3">Puntos de Vida</string>
     <string name="btnReiniciar">Reiniciar Duelo</string>
     <string name="btnReiniciar2">Reiniciar Match</string>
     <!-- Configuracion-->
