@@ -35,7 +35,7 @@
         android:id="@+id/txtIdioma"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Idioma"
+        android:text="Español/Ingles"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

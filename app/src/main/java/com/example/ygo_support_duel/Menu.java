@@ -1,6 +1,7 @@
 package com.example.ygo_support_duel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -53,6 +54,7 @@ public class Menu extends AppCompatActivity {
             }
         });
 
+        //Metodo para ir a la pantalla de opciones
         btnopcion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +62,7 @@ public class Menu extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
 
     }
 

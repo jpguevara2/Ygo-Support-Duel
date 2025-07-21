@@ -81,6 +81,11 @@ public class Configuraciones extends AppCompatActivity {
             }
         });
 
+       // @Override
+        //protected void attachBaseContext(Context newBase) {
+        //    super.attachBaseContext(LocaleHelper.setLocale(newBase, LocaleHelper.getSavedLanguage(newBase)));
+        //}
+
         //Metodo para activar/desactivar audio
         saudio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -101,59 +106,58 @@ public class Configuraciones extends AppCompatActivity {
         });
 
         //Metodo para cambiar el idioma
-        /*sidioma.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        sidioma.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                String langCode = isChecked ? "en" : "es";
+
+                // Guardar idioma
                 SharedPreferences.Editor spEditor = getSharedPreferences("idioma", MODE_PRIVATE).edit();
-                spEditor.putBoolean("idioma", isChecked);
-
-                if (isChecked) {
-                    // Cambiar al español
-                    spEditor.putBoolean("idioma", false);
-                    cambiarIdioma("es");
-                } else {
-                    // Cambiar al idioma predeterminado (inglés)
-                    spEditor.putBoolean("idioma", true);
-                    cambiarIdioma("en");
-                }
+                spEditor.putBoolean("idioma", isChecked); // guardar estado del switch
                 spEditor.apply();
-            }
-        });*/
 
-        //Metodo para volver al menu Principal
-        btnvolver.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Configuraciones.this, Menu.class);
-                startActivity(intent);
+                // Guardar código de idioma y cambiar
+                LocaleHelper.saveLanguage(Configuraciones.this, langCode);
+                recreate(); // reinicia la actividad para aplicar el cambio
             }
         });
 
+                //Metodo para volver al menu Principal
+                btnvolver.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Configuraciones.this, Menu.class);
+                        startActivity(intent);
+                    }
+                });
 
-    }
-    //Metodo para liberar los recursos de media player
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mp != null) {
-            mp.release();
+
+            }
+
+            //Metodo para liberar los recursos de media player
+            @Override
+            protected void onDestroy() {
+                super.onDestroy();
+                if (mp != null) {
+                    mp.release();
+                }
+            }
+
+            private void cambiarIdioma(String codigoIdioma) {
+                Locale locale = new Locale(codigoIdioma);
+                Locale.setDefault(locale);
+
+                Configuration config = new Configuration();
+
+                getResources().updateConfiguration(config, getApplicationContext().getResources().getDisplayMetrics());
+
+
+                // Re-arranca la actividad para aplicar el cambio de idioma
+                Intent intent = new Intent(this, Configuraciones.class); // Reemplaza TuActividadActual con la clase de tu actividad actual
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+
+
         }
-    }
-
-    private void cambiarIdioma(String codigoIdioma) {
-        Locale locale = new Locale(codigoIdioma);
-        Locale.setDefault(locale);
-
-        Configuration config = new Configuration();
-
-        getResources().updateConfiguration(config, getApplicationContext().getResources().getDisplayMetrics());
-
-
-        // Re-arranca la actividad para aplicar el cambio de idioma
-        Intent intent = new Intent(this, Configuraciones.class); // Reemplaza TuActividadActual con la clase de tu actividad actual
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
-    }
-
-}
