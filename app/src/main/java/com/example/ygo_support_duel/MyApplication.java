@@ -4,11 +4,9 @@ import android.app.Application;
 import android.content.Context;
 
 public class MyApplication extends Application {
-
     @Override
     protected void attachBaseContext(Context base) {
-        String language = LocaleHelper.getSavedLanguage(base);
-        super.attachBaseContext(LocaleHelper.setLocale(base, language));
+        super.attachBaseContext(LocaleHelper.setLocale(base, LocaleHelper.getSavedLanguage(base)));
     }
 
     @Override

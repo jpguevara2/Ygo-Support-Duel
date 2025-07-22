@@ -3,6 +3,7 @@ package com.example.ygo_support_duel;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -100,7 +101,8 @@ public class Duelo extends AppCompatActivity {
 
             new Handler().postDelayed(() -> {
                 int number = new Random().nextInt(2) + 1;
-                txtmoneda.setText(number == 1 ? "cara" : "cruz");
+                String resultado = (number == 1) ? getString(R.string.coin_heads) : getString(R.string.coin_tails);
+                txtmoneda.setText(resultado);
             }, 300); // 300 ms de espera
         });
     }
@@ -116,8 +118,8 @@ public class Duelo extends AppCompatActivity {
         input.setHint("Ingrese cantidad");
         builder.setView(input);
 
-        builder.setPositiveButton("(+)", (dialog, which) -> aplicarCambioALP(txtLP, input.getText().toString(), true));
-        builder.setNegativeButton("(-)", (dialog, which) -> aplicarCambioALP(txtLP, input.getText().toString(), false));
+        builder.setPositiveButton("Sumar", (dialog, which) -> aplicarCambioALP(txtLP, input.getText().toString(), true));
+        builder.setNegativeButton("Restar", (dialog, which) -> aplicarCambioALP(txtLP, input.getText().toString(), false));
         builder.setNeutralButton("Cancelar", null);
 
         builder.show();
@@ -195,25 +197,26 @@ public class Duelo extends AppCompatActivity {
 
     private void mostrarDialogoModificarLP(TextView txtLP) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Modificar LP");
+        builder.setTitle(getString(R.string.dialog_title_modify_lp));
 
         final EditText input = new EditText(this);
-        input.setHint("Ej: 500");
+        input.setHint(getString(R.string.dialog_hint_example));
         input.setInputType(InputType.TYPE_CLASS_NUMBER);  // Teclado numérico
         builder.setView(input);
 
-        builder.setPositiveButton("(+)", (dialog, which) -> {
+        builder.setPositiveButton(getString(R.string.button_add), (dialog, which) -> {
             aplicarCambioALP(txtLP, input.getText().toString(), true);
         });
 
-        builder.setNegativeButton("(-)", (dialog, which) -> {
+        builder.setNegativeButton(getString(R.string.button_subtract), (dialog, which) -> {
             aplicarCambioALP(txtLP, input.getText().toString(), false);
         });
 
-        builder.setNeutralButton("Cancelar", null);
+        builder.setNeutralButton(getString(R.string.button_cancel), null);
 
         builder.show();
     }
+
 
 
     // 🔁 Reiniciar partida o duelo
@@ -230,4 +233,10 @@ public class Duelo extends AppCompatActivity {
             rbtn4.setChecked(false);
         }
     }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, LocaleHelper.getSavedLanguage(newBase)));
+    }
+
 }

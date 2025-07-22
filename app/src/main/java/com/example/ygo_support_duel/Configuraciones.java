@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -45,7 +44,6 @@ public class Configuraciones extends AppCompatActivity {
         // Leer preferencias
         SharedPreferences sp = getSharedPreferences("MODE", Context.MODE_PRIVATE);
         SharedPreferences spsound = getSharedPreferences("sound", MODE_PRIVATE);
-        SharedPreferences spidioma = getSharedPreferences("idioma", MODE_PRIVATE);
         SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
 
         // Aplicar estados guardados a los switches
@@ -54,19 +52,21 @@ public class Configuraciones extends AppCompatActivity {
 
         boolean isSoundActive = spsound.getBoolean("sound", false);
         saudio.setChecked(isSoundActive);
+        // Ajustar volumen inicial
+        mp.setVolume(isSoundActive ? 1f : 0f, isSoundActive ? 1f : 0f);
 
         boolean estadoSwitchIdioma = prefs.getBoolean("switchIdiomaChecked", false);
         sidioma.setChecked(estadoSwitchIdioma);
 
         // Cambiar tema
-        stema.setOnClickListener(new View.OnClickListener() {
+        stema.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                boolean isChecked = stema.isChecked();
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPreferences.Editor editor = sp.edit();
                 AppCompatDelegate.setDefaultNightMode(isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
                 editor.putBoolean("night", isChecked);
                 editor.apply();
+                recreate(); // Reiniciar actividad para aplicar tema
             }
         });
 
@@ -77,8 +77,8 @@ public class Configuraciones extends AppCompatActivity {
                 SharedPreferences.Editor spEditor = getSharedPreferences("sound", MODE_PRIVATE).edit();
                 spEditor.putBoolean("sound", isChecked);
                 spEditor.putBoolean("silentMode", !isChecked);
-                mp.setVolume(0, isChecked ? 1 : 0);
                 spEditor.apply();
+                mp.setVolume(isChecked ? 1f : 0f, isChecked ? 1f : 0f);
             }
         });
 
@@ -103,6 +103,7 @@ public class Configuraciones extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Configuraciones.this, Menu.class);
                 startActivity(intent);
+                finish(); // Cerrar esta actividad para evitar apilar
             }
         });
     }
@@ -114,5 +115,4 @@ public class Configuraciones extends AppCompatActivity {
             mp.release();
         }
     }
-
 }

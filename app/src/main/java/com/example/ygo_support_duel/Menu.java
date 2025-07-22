@@ -1,68 +1,66 @@
 package com.example.ygo_support_duel;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 public class Menu extends AppCompatActivity {
 
-    //declarar imagenes de botones
-    ImageButton btnsalir,btnmanual,btnduelo,btnopcion;
-
+    ImageButton btnsalir, btnmanual, btnduelo, btnopcion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // ✅ Aplicar tema oscuro según configuración guardada
+        SharedPreferences sp = getSharedPreferences("MODE", MODE_PRIVATE);
+        boolean isNightmodeActive = sp.getBoolean("night", false);
+        AppCompatDelegate.setDefaultNightMode(
+                isNightmodeActive ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
+        );
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        //asignar variables a imagenes de botones
-        btnsalir = (ImageButton) findViewById(R.id.btnSalida);
-        btnmanual = (ImageButton) findViewById(R.id.btnManual);
-        btnduelo = (ImageButton) findViewById(R.id.btnDuelo);
-        btnopcion =(ImageButton) findViewById(R.id.btnOpcion);
+        // Inicializar botones
+        btnsalir = findViewById(R.id.btnSalida);
+        btnmanual = findViewById(R.id.btnManual);
+        btnduelo = findViewById(R.id.btnDuelo);
+        btnopcion = findViewById(R.id.btnOpcion);
 
-        //metodo para salir de la app
-        btnsalir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.addCategory(Intent.CATEGORY_HOME);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-               startActivity(intent);
-            }
+        // Acción salir
+        btnsalir.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         });
 
-            //metodo para ir a la pantalla del manual de la app
-            btnmanual.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(Menu.this, Manual.class);
-                    startActivity(i);
-                }
-            });
-
-        //metodo para ir a la pantalla de duelo
-        btnduelo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Menu.this, Duelo.class);
-                startActivity(i);
-            }
+        // Ir a manual
+        btnmanual.setOnClickListener(v -> {
+            Intent i = new Intent(Menu.this, Manual.class);
+            startActivity(i);
         });
 
-        //Metodo para ir a la pantalla de opciones
-        btnopcion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Menu.this, Configuraciones.class);
-                startActivity(i);
-            }
+        // Ir a duelo
+        btnduelo.setOnClickListener(v -> {
+            Intent i = new Intent(Menu.this, Duelo.class);
+            startActivity(i);
         });
 
-
+        // Ir a configuraciones
+        btnopcion.setOnClickListener(v -> {
+            Intent i = new Intent(Menu.this, Configuraciones.class);
+            startActivity(i);
+        });
     }
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, LocaleHelper.getSavedLanguage(newBase)));
+    }
 }

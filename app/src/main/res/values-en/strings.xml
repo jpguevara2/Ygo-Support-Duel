@@ -17,6 +17,20 @@
     <!-- Configuracion-->
     <string name="txtConfiguraciones">Settings</string>
     <string name="txtModo">Dark Mode</string>
-    <string name="txtSonido">Sound</string>
+    <string name="txtsonido">Sound</string>
     <string name="txtIdioma">Spanish/English</string>
+    <!-- Duelo-->
+    <string name="txtJugador1">Player 1</string>
+    <string name="txtJugador2">Player 2</string>
+    <string name="btnEditarLP1">Life Points</string>
+    <string name="btnEditarLP2">Life Points</string>
+    <string name="coin_result_default"></string>
+    <string name="coin_heads">Heads</string>
+    <string name="coin_tails">Tails</string>
+
+    <string name="dialog_title_modify_lp">Modify LP</string>
+    <string name="dialog_hint_example">e.g., 500</string>
+    <string name="button_add">Plus</string>
+    <string name="button_subtract">Minus</string>
+    <string name="button_cancel">Cancel</string>
 </resources>

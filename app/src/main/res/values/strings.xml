@@ -16,6 +16,20 @@
     <!-- Configuracion-->
     <string name="txtConfiguraciones">Configuraciones</string>
     <string name="txtModo">Modo Oscuro</string>
-    <string name="txtSonido">Sonido</string>
+    <string name="txtsonido">Sonido</string>
     <string name="txtIdioma">Español/Ingles</string>
+    <!-- Duelo-->
+    <string name="txtJugador1">Jugador 1</string>
+    <string name="txtJugador2">Jugador 2</string>
+    <string name="btnEditarLP1">Puntos de Vida</string>
+    <string name="btnEditarLP2">Puntos de Vida</string>
+    <string name="coin_result_default"></string>
+    <string name="coin_heads">Cara</string>
+    <string name="coin_tails">Cruz</string>
+
+    <string name="dialog_title_modify_lp">Modificar LP</string>
+    <string name="dialog_hint_example">Ej: 500</string>
+    <string name="button_add">Sumar</string>
+    <string name="button_subtract">Restar</string>
+    <string name="button_cancel">Cancelar</string>
 </resources>
