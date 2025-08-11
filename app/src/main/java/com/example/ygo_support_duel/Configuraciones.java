@@ -1,5 +1,6 @@
 package com.example.ygo_support_duel;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -106,6 +107,7 @@ public class Configuraciones extends AppCompatActivity {
                 finish(); // Cerrar esta actividad para evitar apilar
             }
         });
+
     }
 
     @Override

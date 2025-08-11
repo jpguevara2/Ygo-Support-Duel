@@ -29,8 +29,8 @@
     <string name="coin_tails">Tails</string>
 
     <string name="dialog_title_modify_lp">Modify LP</string>
-    <string name="dialog_hint_example">e.g., 500</string>
-    <string name="button_add">Plus</string>
-    <string name="button_subtract">Minus</string>
+    <string name="dialog_hint_example">ex: 500</string>
+    <string name="button_add">Add</string>
+    <string name="button_subtract">Subtract</string>
     <string name="button_cancel">Cancel</string>
 </resources>

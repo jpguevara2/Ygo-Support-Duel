@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Duelo">
+    tools:context=".Duelo"
+    android:keepScreenOn="true">
 
     <Button
         android:id="@+id/btnEditarLP1"
@@ -248,12 +249,12 @@
         android:layout_width="123dp"
         android:layout_height="88dp"
         android:background="@null"
-        app:srcCompat="@drawable/skull2"
-        app:layout_constraintVertical_bias="0.639"
-        app:layout_constraintHorizontal_bias="0.055"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.065"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.643"
+        app:srcCompat="@drawable/skull2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

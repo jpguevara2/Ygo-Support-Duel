@@ -1,5 +1,6 @@
 package com.example.ygo_support_duel;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -11,10 +12,7 @@ import android.widget.ImageButton;
 
 public class Manual2 extends AppCompatActivity {
 
-    //declarar imagenes de boton
     ImageButton btnback;
-
-    //declarar botones
     Button btnp1;
 
     @Override
@@ -22,20 +20,17 @@ public class Manual2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual2);
 
-        //asignar variable a los botones
         btnback = (ImageButton) findViewById(R.id.btnVolver);
         btnp1 = (Button) findViewById(R.id.btnPagina1);
 
-        //metodo para volver al menu principal
         btnback.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void  onClick(View v) {
+            public void onClick(View v) {
                 Intent intent = new Intent(Manual2.this, Menu.class);
                 startActivity(intent);
             }
         });
 
-        //metodo para volver a la pagina 1 del manual
         btnp1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,10 +40,6 @@ public class Manual2 extends AppCompatActivity {
         });
 
     }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(LocaleHelper.setLocale(newBase, LocaleHelper.getSavedLanguage(newBase)));
     }
 
-}
+

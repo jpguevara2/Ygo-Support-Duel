@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:screenOrientation="fullSensor"
-    tools:context=".Duelo">
+    tools:context=".Duelo"
+    android:keepScreenOn="true">
 
         <Button
             android:id="@+id/btnEditarLP1"
