@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class Duelo extends AppCompatActivity {
     RadioButton rbtn1, rbtn2, rbtn3, rbtn4;
 
 
+    RadioGroup group1, group2;
 
 
     @Override
@@ -67,6 +69,13 @@ public class Duelo extends AppCompatActivity {
         rbtn2 = findViewById(R.id.rbtn2);
         rbtn3 = findViewById(R.id.rbtn3);
         rbtn4 = findViewById(R.id.rbtn4);
+
+        rbtn2.setEnabled(false);
+        rbtn4.setEnabled(false);
+
+
+        group1 = findViewById(R.id.group1);
+        group2 = findViewById(R.id.group2);
 
         // Audio
         mp = MediaPlayer.create(this, R.raw.pointdrop);
@@ -107,6 +116,27 @@ public class Duelo extends AppCompatActivity {
                 txtmoneda.setText(resultado);
             }, 300); // 300 ms de espera
         });
+
+        rbtn1.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                rbtn2.setEnabled(true);   // habilita el segundo
+            } else {
+                rbtn2.setEnabled(false);  // lo deshabilita si se desmarca
+
+            }
+        });
+
+
+        rbtn3.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                rbtn4.setEnabled(true);   // habilita el segundo
+            } else {
+                rbtn4.setEnabled(false);  // lo deshabilita si se desmarca
+
+            }
+        });
+
+
     }
 
     // 🔢 Mostrar teclado numérico al modificar LP
@@ -221,6 +251,8 @@ public class Duelo extends AppCompatActivity {
 
 
 
+
+
     // 🔁 Reiniciar partida o duelo
     private void reiniciarDuelo(boolean todo) {
         txtlp1.setText("8000");
@@ -235,6 +267,8 @@ public class Duelo extends AppCompatActivity {
             rbtn4.setChecked(false);
         }
     }
+
+
 
     @Override
     protected void attachBaseContext(Context newBase) {
