@@ -265,6 +265,7 @@ public class Duelo extends AppCompatActivity {
             rbtn2.setChecked(false);
             rbtn3.setChecked(false);
             rbtn4.setChecked(false);
+
         }
     }
 
